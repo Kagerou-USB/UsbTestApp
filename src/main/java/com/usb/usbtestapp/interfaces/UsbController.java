@@ -2,34 +2,33 @@ package com.usb.usbtestapp.interfaces;
 
 // spring
 import org.springframework.stereotype.Controller;
-//import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
-// com.usb
-//import com.usb.usbtestapp.domain.service.UsbTestAppService;
-import com.usb.usbtestapp.domain.model.UsbTestAppModel;
-import lombok.RequiredArgsConstructor;
-
 @Controller
-@RequiredArgsConstructor
 public class UsbController {
 	
-	//final UsbTestAppService usbTestAppService;
-	
-	@RequestMapping("/")
+	@GetMapping(value="/")
 	public ModelAndView index(ModelAndView mav) {
-		mav.addObject("res1", "USB text1");
-		mav.addObject("res2", "USB text2");
-		mav.addObject("res3", "USB text3");
+		mav.addObject("msg", "お名前を書いて送信してください");
+		mav.addObject("res1", "textA");
+		mav.addObject("res2", "textB");
+		mav.addObject("res3", "textC");
 		mav.setViewName("index");
 		return mav;
 	}
-
-	@RequestMapping("/model")
-	public String model() {
-		UsbTestAppModel usbTestAppModel = new UsbTestAppModel(1, "usb", "a");
-		return usbTestAppModel.getName();
-	}
 	
+	@RequestMapping(value="/", method=RequestMethod.POST)
+	public ModelAndView send(@RequestParam("text1")String text1, ModelAndView mav) {
+		mav.addObject("msg", "こんにちは、" + text1 + "さん");
+		mav.addObject("value", text1);
+		mav.addObject("res1", text1 + "くん");
+		mav.addObject("res2", text1 + "どの");
+		mav.addObject("res3", text1 + "さま");
+		mav.setViewName("index");
+		return mav;
+	}
 }

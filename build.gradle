@@ -32,6 +32,7 @@ dependencies {
 	// Spring
     implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
+	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	
 	// Lombok
@@ -39,4 +40,7 @@ dependencies {
 	annotationProcessor "org.projectlombok:lombok:${lombok_version}"
 	testCompileOnly "org.projectlombok:lombok:${lombok_version}"
 	testAnnotationProcessor "org.projectlombok:lombok:${lombok_version}"
+	
+	// DB
+	implementation "com.h2database:h2" 
 }
