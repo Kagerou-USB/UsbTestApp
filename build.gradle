@@ -2,6 +2,7 @@
 buildscript {
   ext {
     springBootVersion = '2.1.16.RELEASE'
+    lombok_version = '1.18.10'
   }
   repositories {
 	mavenCentral()
@@ -28,7 +29,14 @@ repositories {
 
 // Gradle全体で使われるライブラリ
 dependencies {
+	// Spring
     implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	
+	// Lombok
+	compileOnly "org.projectlombok:lombok:${lombok_version}"
+	annotationProcessor "org.projectlombok:lombok:${lombok_version}"
+	testCompileOnly "org.projectlombok:lombok:${lombok_version}"
+	testAnnotationProcessor "org.projectlombok:lombok:${lombok_version}"
 }

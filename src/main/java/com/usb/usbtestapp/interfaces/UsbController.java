@@ -1,12 +1,21 @@
 package com.usb.usbtestapp.interfaces;
 
+// spring
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
+//import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+// com.usb
+//import com.usb.usbtestapp.domain.service.UsbTestAppService;
+import com.usb.usbtestapp.domain.model.UsbTestAppModel;
+import lombok.RequiredArgsConstructor;
+
 @Controller
+@RequiredArgsConstructor
 public class UsbController {
+	
+	//final UsbTestAppService usbTestAppService;
 	
 	@RequestMapping("/")
 	public ModelAndView index(ModelAndView mav) {
@@ -16,24 +25,11 @@ public class UsbController {
 		mav.setViewName("index");
 		return mav;
 	}
-	
-	@RequestMapping("/sum/{num1}/{num2}")
-	public ModelAndView sum(
-			@PathVariable int num1,
-			@PathVariable int num2,
-			ModelAndView mav) {
-		mav.addObject("res1", (num1 + num2));
-		mav.setViewName("index");
-		return mav;
+
+	@RequestMapping("/model")
+	public String model() {
+		UsbTestAppModel usbTestAppModel = new UsbTestAppModel(1, "usb", "a");
+		return usbTestAppModel.getName();
 	}
 	
-	@RequestMapping("/diff/{num1}/{num2}")
-	public ModelAndView diff(
-			@PathVariable int num1,
-			@PathVariable int num2,
-			ModelAndView mav) {
-		mav.addObject("res1", (num1 - num2));
-		mav.setViewName("index");
-		return mav;
-	}
 }
