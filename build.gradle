@@ -1,0 +1,34 @@
+// ビルドスクリプト（ビルドに使われる処理がまとめられている）
+buildscript {
+  ext {
+    springBootVersion = '2.1.16.RELEASE'
+  }
+  repositories {
+	mavenCentral()
+  }
+  dependencies {
+    classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+  }
+}
+
+// Gradleプラグイン
+apply plugin: 'java' // Java言語対応
+apply plugin: 'eclipse' // Eclipse対応
+apply plugin: 'org.springframework.boot' // Spring Boot対応
+apply plugin: 'io.spring.dependency-management' // dependency管理
+
+group = 'com.usb.usbtestapp'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = 1.8
+
+// Gradle全体で使われるリポジトリ
+repositories {
+	mavenCentral()
+}
+
+// Gradle全体で使われるライブラリ
+dependencies {
+    implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+}
