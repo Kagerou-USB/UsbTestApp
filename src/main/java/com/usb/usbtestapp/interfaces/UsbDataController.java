@@ -1,5 +1,7 @@
 package com.usb.usbtestapp.interfaces;
 
+import java.util.Optional;
+
 import javax.annotation.PostConstruct;
 import javax.transaction.Transactional;
 
@@ -8,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.servlet.ModelAndView;
 
 //com.usb
@@ -55,9 +58,27 @@ public class UsbDataController {
 	
 	@RequestMapping(value = "/data", method = RequestMethod.POST)
 	@Transactional()
-	public ModelAndView form(
+	public ModelAndView add(
 			@ModelAttribute("formModel") HumanDataEntity humanDataEntity,
 			ModelAndView mav) {
+		repository.saveAndFlush(humanDataEntity);
+		return new ModelAndView("redirect:/data");
+	}
+	
+	@RequestMapping(value="/data/edit/{id}", method=RequestMethod.GET)
+	public ModelAndView edit(@PathVariable int id, ModelAndView mav) {
+		mav.setViewName("edit");
+		mav.addObject("title", "Edit HumanData");
+		Optional<HumanDataEntity> humanData = repository.findById((long)id);
+		mav.addObject("formModel", humanData.get());
+		Iterable<HumanDataEntity> list = repository.findAll();
+		mav.addObject("datalist", list);
+		return mav;
+	}
+	
+	@RequestMapping(value="/data/edit", method=RequestMethod.POST)
+	@Transactional()
+	public ModelAndView update(@ModelAttribute HumanDataEntity humanDataEntity) {
 		repository.saveAndFlush(humanDataEntity);
 		return new ModelAndView("redirect:/data");
 	}
