@@ -79,6 +79,8 @@ public class UsbDataController {
 	@RequestMapping(value="/data/edit", method=RequestMethod.POST)
 	@Transactional()
 	public ModelAndView update(@ModelAttribute HumanDataEntity humanDataEntity) {
+		// addとの違いはIDが指定されているかどうか…
+		// 指定されている場合（viewからPOSTされる）更新処理と解釈される
 		repository.saveAndFlush(humanDataEntity);
 		return new ModelAndView("redirect:/data");
 	}

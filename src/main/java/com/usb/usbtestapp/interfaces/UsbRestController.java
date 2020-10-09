@@ -1,7 +1,7 @@
 package com.usb.usbtestapp.interfaces;
 
+import org.springframework.web.bind.annotation.PathVariable;
 // spring
-//import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -17,9 +17,9 @@ public class UsbRestController {
 	
 	final UsbTestAppService usbTestAppService;
 
-	@RequestMapping("/rest")
-	public UsbTestAppModel model() {
-		UsbTestAppModel usbTestAppModel = usbTestAppService.createUsbTestAppModel();
+	@RequestMapping("/rest/{id}")
+	public UsbTestAppModel model(@PathVariable int id) {
+		UsbTestAppModel usbTestAppModel = usbTestAppService.createUsbTestAppModel(id);
 		return usbTestAppModel;
 	}
 	

@@ -1,25 +1,62 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head>
-  <title>Top Page</title>
-  <meta http-equiv="Content-Type" 
-    content="text/html" charset="UTF-8">
-  <style>
-  h1 {font-size:18pt; font-weight:bold; color:gray }
-  body { font-size:13pt; color:gray margin:5px 25px; }
-  pre { font-size:13pt; color:gray; padding:5px 10px;
-  border:1px solid gray; }
-  </style>
-</head>
-<body>
-  <h1>USB Page</h1>
-  <p th:text="${msg}"> please wait... </p>
-  <form method="post" action="/">
-    <input type="text" name="text1" th:value="${value}" />
-    <input type="submit" value="Click" />
-  </form>
-  <pre th:text="${res1}"> Please wait...</pre>
-  <pre th:text="${res2}"> Please wait...</pre>
-  <pre th:text="${res3}"> Please wait...</pre>
-</body>
+  <head>
+    <title>Top Page</title>
+    <meta http-equiv="Content-Type" content="text/html" charset="UTF-8">
+    <style>
+      h1 { 
+        font-size:18pt; 
+        font-weight:bold; 
+        color:gray 
+      }
+      body { 
+        font-size:13pt; 
+        color:gray margin:5px 25px; 
+      }
+      pre { 
+        font-size:13pt; 
+        color:gray; 
+        padding:5px 10px; 
+        border:1px solid gray; 
+      }
+    </style>
+  </head>
+  <body>
+    <h1>USB Page</h1>
+    <p th:text="${msg}"> please wait... </p>
+    <form method="post" action="/">
+      <div>
+        <input type="text" name="text1" th:value="${value1}" />
+      </div>
+      <div>
+        <input type="text" name="text2" th:value="${value2}" />
+      </div>
+      <pre th:text="${res1}"> Please wait...</pre>
+      <pre th:text="${res2}"> Please wait...</pre>
+      <div>
+  	    <input type="checkbox" id="checkA" name="check1" />
+  	    <label for="checkA">チェック</label>
+  	  </div>
+   	  <div>
+  	    <input type="radio" id="radioA" name="radio1" value="male" />
+  	    <label for="radioA">男性</label>
+  	    <input type="radio" id="radioB" name="radio1" value="female" />
+  	    <label for="radioB">女性</label>
+  	  </div>
+    	<div>
+  	    <select id="selectA" name="select1" size="4">
+  	      <option value="Windows">Windows</option>
+  	      <option value="Mac">Mac</option>
+  	      <option value="Linux">Linux</option>
+  	    </select>
+  	    <select id="selectB" name="select2" size="4" multiple="multiple">
+  	      <option value="Android">Android</option>
+  	      <option value="Iphone">Iphone</option>
+  	      <option value="Winfone">Winfone</option>
+  	    </select>
+  	  </div>
+  	  <input type="submit" value="Click" />
+    </form>
+    <pre th:text="${res3}"> please wait... </pre>
+  </body>
 </html>

@@ -15,7 +15,7 @@ public class UsbTestAppService {
 	
 	final UsbTestAppModelFactory usbTestAppModelFactory;
 	
-	public UsbTestAppModel createUsbTestAppModel() {
-		return usbTestAppModelFactory.createUsbTestAppModel();
+	public UsbTestAppModel createUsbTestAppModel(int id) {
+		return usbTestAppModelFactory.createUsbTestAppModel(id);
 	}
 }
