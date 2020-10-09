@@ -56,7 +56,7 @@ public class UsbDataController {
 		return mav;
 	}
 	
-	@RequestMapping(value = "/data", method = RequestMethod.POST)
+	@RequestMapping(value = "/data", method=RequestMethod.POST)
 	@Transactional()
 	public ModelAndView add(
 			@ModelAttribute("formModel") HumanDataEntity humanDataEntity,
@@ -78,12 +78,9 @@ public class UsbDataController {
 	
 	@RequestMapping(value="/data/edit", method=RequestMethod.POST)
 	@Transactional()
-	public ModelAndView update(@ModelAttribute HumanDataEntity humanDataEntity) {
+	public ModelAndView update(
+			@ModelAttribute("formModel") HumanDataEntity humanDataEntity) {
 		repository.saveAndFlush(humanDataEntity);
 		return new ModelAndView("redirect:/data");
 	}
 }
-
-
-
-
