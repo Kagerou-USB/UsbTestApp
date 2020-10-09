@@ -7,7 +7,7 @@ import com.usb.usbtestapp.domain.model.UsbTestAppModel;
 @Component
 public class UsbTestAppModelFactory {
 	
-	public UsbTestAppModel createUsbTestAppModel() {
-		return new UsbTestAppModel(1, "usb", "31");
+	public UsbTestAppModel createUsbTestAppModel(int id) {
+		return new UsbTestAppModel(id, "usb", "31");
 	}
 }
