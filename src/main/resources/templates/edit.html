@@ -13,7 +13,7 @@
 	</style>
 </head>
 <body>
-	<h1 th:text="${title}">Please wait…</h1>
+	<h1 th:text="#{content.edit_title}">Please wait…</h1>
 	<table>
 	<form method="post" action="/data/edit" th:object="${formModel}">
 		<!-- 更新処理用に type=""hidden を追加 -->
