@@ -7,6 +7,8 @@ import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -60,10 +62,22 @@ public class UsbDataController {
 	@RequestMapping(value = "/data", method=RequestMethod.POST)
 	@Transactional()
 	public ModelAndView add(
-			@ModelAttribute("formModel") HumanDataEntity humanDataEntity,
+			@ModelAttribute("formModel")
+			@Validated HumanDataEntity humanDataEntity,
+			BindingResult result,
 			ModelAndView mav) {
-		repository.saveAndFlush(humanDataEntity);
-		return new ModelAndView("redirect:/data");
+		ModelAndView res = null;
+		if (!result.hasErrors()) {
+			repository.saveAndFlush(humanDataEntity);
+			res = new ModelAndView("redirect:/data");
+		} else {
+			mav.setViewName("edit");
+			mav.addObject("msg", "sorry, error is occured...");
+			Iterable<HumanDataEntity> list = repository.findAll();
+			mav.addObject("datalist", list);
+			res = mav;
+		}
+		return res;
 	}
 	
 	@RequestMapping(value="/data/edit/{id}", method=RequestMethod.GET)

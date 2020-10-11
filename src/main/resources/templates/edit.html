@@ -10,20 +10,43 @@
 	tr { margin:5px; }
 	th { padding:5px; color:white; background:darkgray; }
 	td { padding:5px; color:black; background:#f0f0f0; }
+	.err { color:red; }
 	</style>
 </head>
 <body>
 	<h1 th:text="#{content.edit_title}">Please wait…</h1>
 	<table>
 	<form method="post" action="/data/edit" th:object="${formModel}">
+		<ul>
+		  <li th:each="error : ${#fields.detailedErrors()}"
+		  	class="err" th:text="${error.message}" />
+		</ul>
 		<!-- 更新処理用に type=""hidden を追加 -->
 		<input type="hidden" name="id" th:value="*{id}" />
 		<tr><td><label for="name">名前</label></td>
-			<td><input type="text" name="name" th:value="*{name}" /></td></tr>
+			<td>
+			  <input type="text" name="name" th:value="*{name}" th:errorclass="err" />
+			  <div th:if="${#fields.hasErrors('name')}" 
+			    th:errors="*{name}" th:errorclass="err">
+			  </div>
+			</td>
+	    </tr>
 		<tr><td><label for="age">年齢</label></td>
-			<td><input type="text" name="age"  th:value="*{age}" /></td></tr>
+			<td>
+			  <input type="text" name="age"  th:value="*{age}" th:errorclass="err" />
+			  <div th:if="${#fields.hasErrors('age')}" 
+			    th:errors="*{age}" th:errorclass="err">
+			  </div>
+			</td>
+		  </tr>
 		<tr><td><label for="mail">メール</label></td>
-			<td><input type="text" name="mail"  th:value="*{mail}" /></td></tr>
+			<td>
+			  <input type="text" name="mail" th:value="*{mail}" th:errorclass="err" />
+			  <div th:if="${#fields.hasErrors('mail')}" 
+			    th:errors="*{mail}" th:errorclass="err">
+			  </div>
+			</td>
+		  </tr>
 		<tr><td><label for="memo">メモ</label></td>
 			<td><textarea name="memo"  th:text="*{memo}" 
 			cols="20" rows="5"></textarea></td></tr>

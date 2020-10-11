@@ -8,6 +8,12 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotEmpty;
+
+import com.sun.istack.NotNull;
 
 /**
  * Entity：エンティティクラスを示すアノテーション
@@ -27,15 +33,20 @@ public class HumanDataEntity {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column
+	@NotNull
 	private long id;
 	
 	@Column(length = 50, nullable = false)
+	@NotEmpty(message="空白は不可")
 	private String name;
 	
 	@Column(length = 200, nullable = false)
+	@Email(message="メールアドレスのみ")
 	private String mail;
 	
 	@Column(nullable = false)
+	@Min(0)
+	@Max(200)
 	private Integer age;
 	
 	@Column(nullable = true)
