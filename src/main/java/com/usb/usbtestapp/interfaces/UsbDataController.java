@@ -32,19 +32,19 @@ public class UsbDataController {
 		d1.setName("usb");
 		d1.setAge(31);
 		d1.setMail("usb@aaa.com");
-		d1.setMemo("3.0");
+		d1.setMemo("090999999");
 		repository.saveAndFlush(d1);
 		HumanDataEntity d2 = new HumanDataEntity();
 		d2.setName("hikakin");
 		d2.setAge(31);
 		d2.setMail("hikakin@bb.com");
-		d2.setMemo("I`m Youtuber.");
+		d2.setMemo("080888888");
 		repository.saveAndFlush(d2);
 		HumanDataEntity d3 = new HumanDataEntity();
 		d3.setName("mugi");
 		d3.setAge(5);
 		d3.setMail("mugi@cc.com");
-		d3.setMemo("I`m Plant.");
+		d3.setMemo("070777777");
 		repository.saveAndFlush(d3);
 	}
 	

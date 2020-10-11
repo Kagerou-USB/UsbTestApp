@@ -14,6 +14,7 @@ import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
 
 import com.sun.istack.NotNull;
+import com.usb.usbtestapp.validator.Phone;
 
 /**
  * Entity：エンティティクラスを示すアノテーション
@@ -50,5 +51,6 @@ public class HumanDataEntity {
 	private Integer age;
 	
 	@Column(nullable = true)
+	@Phone(onlyNumber = true)
 	private String memo;
 }
