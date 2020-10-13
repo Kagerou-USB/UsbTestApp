@@ -9,14 +9,14 @@ public class PhoneValidator implements ConstraintValidator<Phone, String> {
 	
 	@Override
 	public void initialize(Phone phone) {
-		onlyNumber = phone.onlyNumber();
+		this.onlyNumber = phone.onlyNumber();
 	}
 	
 	public boolean isValid(String input, ConstraintValidatorContext cxt) {
 		if (input == null) {
 			return false;
 		}
-		if (onlyNumber) {
+		if (this.onlyNumber) {
 			return input.matches("[0-9]*");
 		}
 		return input.matches("[0-9()-]*");
