@@ -7,6 +7,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.Max;
@@ -28,6 +30,12 @@ import com.usb.usbtestapp.validator.Phone;
 
 @Entity
 @Table(name="human")
+@NamedQueries ({
+	@NamedQuery (
+		name = "findWithName", 
+		query = "from HumanDataEntity where name like :fname"
+	)}
+)
 @Data
 public class HumanDataEntity {
 	

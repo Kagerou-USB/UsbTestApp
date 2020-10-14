@@ -52,12 +52,12 @@ public class HumanDataDaoImpl implements HumanDataDao<HumanDataEntity> {
 	public List<HumanDataEntity> find(String fstr) {
 		List<HumanDataEntity> list = null;
 		//String qstr = "from HumanDataEntity where id = :fid or name like :fname or mail like :fmail";
-		String qstr = "from HumanDataEntity where id = ?1 or name like ?2 or mail like ?3";
+		//String qstr = "from HumanDataEntity where id = ?1 or name like ?2 or mail like ?3";
 		Long fid = 0L;
 		try {
 			fid = Long.parseLong(fstr);
 		} catch (NumberFormatException e) {
-			e.printStackTrace();
+			//e.printStackTrace();
 		}
 		/*
 		Query query = this.entityManager.createQuery(qstr)
@@ -65,10 +65,14 @@ public class HumanDataDaoImpl implements HumanDataDao<HumanDataEntity> {
 				.setParameter("fname", "%" + fstr + "%")
 				.setParameter("fmail", fstr + "@%");
 		*/
+		/*
 		Query query = this.entityManager.createQuery(qstr)
 				.setParameter(1, fid)
 				.setParameter(2, "%" + fstr + "%")
 				.setParameter(3, fstr + "@%");
+		*/
+		Query query = this.entityManager.createNamedQuery("findWithName")
+				.setParameter("fname", "%" + fstr + "%");
 		list = query.getResultList();
 		return list;
 	}
