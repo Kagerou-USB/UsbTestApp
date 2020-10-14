@@ -47,4 +47,13 @@ public class HumanDataDaoImpl implements HumanDataDao<HumanDataEntity> {
 		return (List<HumanDataEntity>)this.entityManager.createQuery("from HumanDataEntity where name = "
 				+ name).getResultList();
 	}
+	
+	@SuppressWarnings("unchecked")
+	public List<HumanDataEntity> find(String fstr) {
+		List<HumanDataEntity> list = null;
+		String qstr = "from HumanDataEntity where id = :fstr";
+		Query query = this.entityManager.createQuery(qstr).setParameter("fstr", Long.parseLong(fstr));
+		list = query.getResultList();
+		return list;
+	}
 }

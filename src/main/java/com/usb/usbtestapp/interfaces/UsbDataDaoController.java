@@ -1,8 +1,11 @@
 package com.usb.usbtestapp.interfaces;
 
+import java.util.List;
+
 import javax.annotation.PostConstruct;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -57,6 +60,31 @@ public class UsbDataDaoController {
 		mav.addObject("msg", "Daoサンプル");
 		Iterable<HumanDataEntity> list = dao.findByName(name);
 		mav.addObject("datalist", list);
+		return mav;
+	}
+	
+	@RequestMapping(value = "/find", method = RequestMethod.GET)
+	public ModelAndView find(ModelAndView mav) {
+		mav.setViewName("find");
+		mav.addObject("title", "USB Find Page");
+		Iterable<HumanDataEntity> list = dao.getAll();
+		mav.addObject("datalist", list);
+		return mav;
+	}
+	
+	@RequestMapping(value = "/find", method = RequestMethod.POST)
+	public ModelAndView search(HttpServletRequest request, 
+			ModelAndView mav) {
+		mav.setViewName("find");
+		String param = request.getParameter("fstr");
+		if (param == "") {
+			mav = new ModelAndView("redirect:/find");
+		} else {
+			mav.addObject("title", "USB Find result");
+			mav.addObject("value", param);
+			List<HumanDataEntity> list = dao.find(param);
+			mav.addObject("datalist", list);
+		}
 		return mav;
 	}
 }
