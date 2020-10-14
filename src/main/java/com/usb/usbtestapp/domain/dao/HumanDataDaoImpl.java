@@ -51,8 +51,17 @@ public class HumanDataDaoImpl implements HumanDataDao<HumanDataEntity> {
 	@SuppressWarnings("unchecked")
 	public List<HumanDataEntity> find(String fstr) {
 		List<HumanDataEntity> list = null;
-		String qstr = "from HumanDataEntity where id = :fstr";
-		Query query = this.entityManager.createQuery(qstr).setParameter("fstr", Long.parseLong(fstr));
+		String qstr = "from HumanDataEntity where id = :fid or name like :fname or mail like :fmail";
+		Long fid = 0L;
+		try {
+			fid = Long.parseLong(fstr);
+		} catch (NumberFormatException e) {
+			e.printStackTrace();
+		}
+		Query query = this.entityManager.createQuery(qstr)
+				.setParameter("fid", fid)
+				.setParameter("fname", "%" + fstr + "%")
+				.setParameter("fmail", fstr + "@%");
 		list = query.getResultList();
 		return list;
 	}
