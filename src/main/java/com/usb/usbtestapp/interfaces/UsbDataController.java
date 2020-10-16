@@ -124,7 +124,10 @@ public class UsbDataController {
 	) {
 		mav.setViewName("data");
 		mav.addObject("title", "USB RepoQuery Page");
-		Iterable<HumanDataEntity> list = repository.findAllOrderByName();
+		//降順ソート
+		//Iterable<HumanDataEntity> list = repository.findAllOrderByName();
+		// age範囲検索
+		Iterable<HumanDataEntity> list = repository.findByAge(30,40);
 		mav.addObject("datalist", list);
 		return mav;
 	}

@@ -37,7 +37,7 @@ public class UsbDataDaoController {
 	@RequestMapping(value = "/dao", method = RequestMethod.GET)
 	public ModelAndView index(ModelAndView mav) {
 		mav.setViewName("dao");
-		mav.addObject("msg", "Daoサンプル");
+		mav.addObject("msg", "USB Dao");
 		Iterable<HumanDataEntity> list = dao.getAll();
 		mav.addObject("datalist", list);
 		return mav;
@@ -46,7 +46,7 @@ public class UsbDataDaoController {
 	@RequestMapping(value = "/dao/id/{id}", method = RequestMethod.GET)
 	public ModelAndView searchId(@PathVariable int id, ModelAndView mav) {
 		mav.setViewName("dao");
-		mav.addObject("msg", "Daoサンプル");
+		mav.addObject("msg", "USB Dao");
 		HumanDataEntity humanDataEntity = dao.findById((long)id);
 		mav.addObject("datalist", humanDataEntity);
 		return mav;
@@ -57,7 +57,7 @@ public class UsbDataDaoController {
 	public ModelAndView searchName(@PathVariable String name, 
 			ModelAndView mav) {
 		mav.setViewName("dao");
-		mav.addObject("msg", "Daoサンプル");
+		mav.addObject("msg", "USB Dao");
 		Iterable<HumanDataEntity> list = dao.findByName(name);
 		mav.addObject("datalist", list);
 		return mav;
@@ -85,6 +85,15 @@ public class UsbDataDaoController {
 			List<HumanDataEntity> list = dao.find(param);
 			mav.addObject("datalist", list);
 		}
+		return mav;
+	}
+	
+	@RequestMapping(value = "/dao/findbyage", method = RequestMethod.GET)
+	public ModelAndView findByAge(ModelAndView mav) {
+		mav.setViewName("dao");
+		mav.addObject("msg", "USB Dao");
+		Iterable<HumanDataEntity> list = dao.findByAge(30, 40);
+		mav.addObject("datalist", list);
 		return mav;
 	}
 }

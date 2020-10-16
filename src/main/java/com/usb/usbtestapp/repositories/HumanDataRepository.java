@@ -4,6 +4,7 @@ import com.usb.usbtestapp.entities.HumanDataEntity;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -34,4 +35,7 @@ public interface HumanDataRepository extends JpaRepository<HumanDataEntity, Long
 	
 	@Query("SELECT d FROM HumanDataEntity d ORDER BY d.name")
 	public List<HumanDataEntity> findAllOrderByName();
+	
+	@Query("from HumanDataEntity where age > :min and age < :max")
+	public List<HumanDataEntity> findByAge(@Param("min") int min, @Param("max") int max);
 }

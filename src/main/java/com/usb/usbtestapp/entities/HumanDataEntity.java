@@ -34,6 +34,10 @@ import com.usb.usbtestapp.validator.Phone;
 	@NamedQuery (
 		name = "findWithName", 
 		query = "from HumanDataEntity where name like :fname"
+	),
+	@NamedQuery (
+		name = "findByAge", 
+		query = "from HumanDataEntity where age > :min and age < :max"
 	)}
 )
 @Data

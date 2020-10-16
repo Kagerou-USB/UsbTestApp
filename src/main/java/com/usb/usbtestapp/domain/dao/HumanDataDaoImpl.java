@@ -76,4 +76,13 @@ public class HumanDataDaoImpl implements HumanDataDao<HumanDataEntity> {
 		list = query.getResultList();
 		return list;
 	}
+	
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<HumanDataEntity> findByAge(int min, int max) {
+		return (List<HumanDataEntity>)entityManager.createNamedQuery("findByAge")
+				.setParameter("min", min)
+				.setParameter("max", max)
+				.getResultList();
+	}
 }
