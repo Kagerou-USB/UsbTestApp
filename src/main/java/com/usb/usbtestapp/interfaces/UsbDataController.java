@@ -116,4 +116,16 @@ public class UsbDataController {
 		repository.deleteById(id);
 		return new ModelAndView("redirect:/data");
 	}
+	
+	@RequestMapping(value="/data/repoquery", method = RequestMethod.GET)
+	public ModelAndView repoQuery(
+			@ModelAttribute("formModel") HumanDataEntity humanDataEntity, 
+			ModelAndView mav
+	) {
+		mav.setViewName("data");
+		mav.addObject("title", "USB RepoQuery Page");
+		Iterable<HumanDataEntity> list = repository.findAllOrderByName();
+		mav.addObject("datalist", list);
+		return mav;
+	}
 }

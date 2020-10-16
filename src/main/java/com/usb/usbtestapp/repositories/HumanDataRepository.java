@@ -3,7 +3,10 @@ package com.usb.usbtestapp.repositories;
 import com.usb.usbtestapp.entities.HumanDataEntity;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
+
+import java.util.List;
 /**
  * Optional
  *  Java 8から登場した「nullかもしれないオブジェクトをラップするためのクラス」
@@ -28,4 +31,7 @@ public interface HumanDataRepository extends JpaRepository<HumanDataEntity, Long
 	 */
 	
 	public Optional<HumanDataEntity> findById(Long id);
+	
+	@Query("SELECT d FROM HumanDataEntity d ORDER BY d.name")
+	public List<HumanDataEntity> findAllOrderByName();
 }
